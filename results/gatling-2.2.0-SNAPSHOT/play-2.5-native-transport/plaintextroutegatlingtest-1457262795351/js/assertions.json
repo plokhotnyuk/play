@@ -1,0 +1,10 @@
+{
+  "simulation": "com.plokhotnyuk.play.PlaintextRouteGatlingTest",
+  "simulationId": "plaintextroutegatlingtest",
+  "start": 1457262795351,
+  "description": "",
+  "scenarios": ["PlaintextGet"],
+  "assertions": [
+
+  ]
+}

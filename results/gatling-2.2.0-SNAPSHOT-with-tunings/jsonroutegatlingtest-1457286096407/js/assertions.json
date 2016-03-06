@@ -1,0 +1,10 @@
+{
+  "simulation": "com.plokhotnyuk.play.JsonRouteGatlingTest",
+  "simulationId": "jsonroutegatlingtest",
+  "start": 1457286096407,
+  "description": "",
+  "scenarios": ["JsonGet"],
+  "assertions": [
+
+  ]
+}
