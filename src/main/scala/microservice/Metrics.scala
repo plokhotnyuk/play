@@ -3,9 +3,9 @@ package microservice
 import java.util.concurrent.atomic.AtomicLong
 import javax.inject.Inject
 import javax.inject.Singleton
-import akka.stream.Materializer
+import akka.util.ByteString
+import play.api.libs.streams.Accumulator
 import play.api.mvc._
-import scala.concurrent.Future
 
 @Singleton
 class MetricsController extends Controller {
@@ -14,12 +14,14 @@ class MetricsController extends Controller {
   }
 }
 
-trait MetricsFilter extends Filter
+trait MetricsFilter extends EssentialFilter
 
-class MetricsFilterImpl @Inject() (implicit val mat: Materializer) extends MetricsFilter {
-  def apply(nextFilter: (RequestHeader) => Future[Result])(rh: RequestHeader): Future[Result] = {
-    Metrics.cnt.incrementAndGet()
-    nextFilter(rh)
+class MetricsFilterImpl @Inject() extends MetricsFilter {
+  def apply(nextFilter: EssentialAction) = new EssentialAction {
+    override def apply(rh: RequestHeader): Accumulator[ByteString, Result] = {
+      Metrics.cnt.incrementAndGet()
+      nextFilter(rh)
+    }
   }
 }
 
