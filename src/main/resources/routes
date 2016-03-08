@@ -3,5 +3,6 @@
 # ~~~~
 
 # Home page
-GET     /json                           @com.plokhotnyuk.play.Application.json
-GET     /plaintext                      @com.plokhotnyuk.play.Application.plaintext
+GET     /json                           microservice.HelloWorldController.json
+GET     /plaintext                      microservice.HelloWorldController.plaintext
+GET     /metrics                        microservice.MetricsController.metrics

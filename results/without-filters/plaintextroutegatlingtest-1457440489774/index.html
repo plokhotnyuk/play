@@ -1,0 +1,1020 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="shortcut icon" type="image/x-icon" href="style/favicon.ico"/>
+<link href="style/style.css" rel="stylesheet" type="text/css" />
+<link href="style/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/gatling.js"></script>
+<script type="text/javascript" src="js/moment.min.js"></script>
+<script type="text/javascript" src="js/menu.js"></script>
+<script type="text/javascript" src="js/all_sessions.js"></script>
+<script type="text/javascript" src="js/stats.js"></script>
+<script type="text/javascript" src="js/highstock.js"></script>
+<script type="text/javascript" src="js/highcharts-more.js"></script>
+<script type="text/javascript" src="js/theme.js"></script>
+<script type="text/javascript" src="js/unpack.js"></script>
+<title>Gatling Stats - Global Information</title>
+</head>
+<body>
+<div class="frise"></div>
+<div class="container details">
+    <div class="head">
+        <a href="http://gatling.io" target="blank_" title="Gatling Home Page"><img alt="Gatling" src="style/logo.png"/></a>
+    </div>
+    <div class="main">
+        <div class="cadre">
+                <div class="onglet">
+                    <img src="style/cible.png" />
+                    <p><span>plaintextroutegatlingtest</span></p>
+                </div>
+                <div class="content">
+                    <div class="sous-menu">
+                        <div class="item ouvert"><a href="index.html">GLOBAL</a></div>
+                        <div class="item "><a id="details_link" href="#">DETAILS</a></div>
+                        <script type="text/javascript">
+                          var timestamp = 1457440489774;
+                          var runStartHumanDate = moment(timestamp).format("YYYY-MM-DD HH:mm:ss Z");
+                          document.writeln("<p class='sim_desc' title='"+ runStartHumanDate +", duration : 151 seconds' data-content=''>");
+                          document.writeln("<b>" + runStartHumanDate + ", duration : 151 seconds </b>");
+                          document.writeln("</p>");
+                        </script>
+                    </div>
+                    <div class="content-in">
+                        <h1><span>> </span>Global Information</h1>
+                        <div class="article">
+                            
+            <div class="schema polar">
+              <div id="container_number_of_requests"></div>
+            </div>
+
+            <div class="schema demi">
+              <div id="container_indicators" class="demi"></div>
+            </div>
+
+                        <div class="statistics extensible-geant collapsed">
+                            <div class="title">
+                                <div class="right">
+                                    <span class="expand-all-button">Expand all groups</span> | <span class="collapse-all-button">Collapse all groups</span>
+                                </div>
+                                <div id="statistics_title" class="title_collapsed">STATISTICS <span>(Click here to show more)</span></div>
+                            </div>
+                            <table id="container_statistics_head" class="statistics-in extensible-geant">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2" id="col-1" class="header sortable sorted-up"><span>Requests</span></th>
+                                        <th colspan="5" class="header"><span class="executions">Executions</span></th>
+                                        <th colspan="8" class="header"><span class="response-time">Response Time (ms)</span></th>
+                                    </tr>
+                                    <tr>
+                                        <th id="col-2" class="header sortable"><span>Total</span></th>
+                                        <th id="col-3" class="header sortable"><span>OK</span></th>
+                                        <th id="col-4" class="header sortable"><span>KO</span></th>
+                                        <th id="col-5" class="header sortable"><span>% KO</span></th>
+                                        <th id="col-6" class="header sortable"><span>Req/s</span></th>
+                                        <th id="col-7" class="header sortable"><span>Min</span></th>
+<th id="col-8" class="header sortable"><span>50th pct</span></th>
+<th id="col-9" class="header sortable"><span>75th pct</span></th>
+<th id="col-10" class="header sortable"><span>95th pct</span></th>
+<th id="col-11" class="header sortable"><span>99th pct</span></th>
+<th id="col-12" class="header sortable"><span>Max</span></th>
+<th id="col-13" class="header sortable"><span>Mean</span></th>
+<th id="col-14" class="header sortable"><span>Std Dev</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div class="scrollable">
+                                <table id="container_statistics_body" class="statistics-in extensible-geant">
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+            <div class="schema geant">
+              <a name="active_users"></a>
+              <div id="container_active_users" class="geant"></div>
+            </div>
+
+            <div class="schema geant">
+              <div id="container_distrib" class="geant"></div>
+            </div>
+
+            <div class="schema geant">
+              <div id="container" class="geant"></div>
+            </div>
+
+            <div class="schema geant">
+              <a name="requests"></a>
+                <div id="container_requests" class="geant"></div>
+            </div>
+
+            <div class="schema geant">
+              <a name="responses"></a>
+                <div id="container_responses" class="geant"></div>
+            </div>
+
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="nav">
+        <ul></ul>
+    </div>
+</div>
+<div class="foot">
+    <a href="http://gatling.io" title="Gatling Home Page"><img alt="Gatling" src="style/logo-gatling.jpg"/></a>
+</div>
+<script type="text/javascript">
+    var pageStats = stats.stats;
+    $(document).ready(function() {
+        $('.sim_desc').popover({trigger:'hover', placement:'bottom'});
+        setDetailsLinkUrl();
+        setGlobalMenu();
+        setActiveMenu();
+        fillStats(pageStats);
+        
+function numberOfRequestsDataForGroup(group) {
+  var data = {names: [], oks: [], kos: []};
+
+  $.each(group.contents, function(contentName, content) {
+    if (content.type == 'GROUP') {
+      var result = numberOfRequestsDataForGroup(content);
+      data.names = data.names.concat(result.names);
+      data.oks = data.oks.concat(result.oks);
+      data.kos = data.kos.concat(result.kos);
+    }
+    else if (content.type == 'REQUEST') {
+      data.names.push(content.path);
+      data.oks.push(parseInt(content.stats.numberOfRequests.ok));
+      data.kos.push(parseInt(content.stats.numberOfRequests.ko));
+    }
+  });
+
+  return data;
+}
+
+var numberOfRequestsData = numberOfRequestsDataForGroup(stats);
+
+new Highcharts.Chart({
+  chart: {
+    renderTo:'container_number_of_requests',
+    polar:true,
+    type:'column',
+    height:330
+  },
+  credits:{
+    enabled:false
+  },
+  title:{
+    text:'<span class="chart_title">Number of requests</span>',
+    useHTML: true
+  },
+  xAxis:{
+    tickmarkPlacement:'on',
+    tickInterval: 1,
+    categories:numberOfRequestsData.names,
+    labels:{ enabled:false }
+  },
+  yAxis:{
+    min:0
+  },
+  plotOptions:{
+    series:{
+      stacking:'normal',
+      groupPadding:0,
+      pointPlacement:'on',
+      shadow: true
+    }
+  },
+  legend: {
+    	borderWidth: 0.5,
+      borderRadius: 3,
+      borderColor: 'black',
+      itemStyle: { fontWeight: "normal" }
+  },
+  series:[
+    {
+      name:'KO',
+      data:numberOfRequestsData.kos,
+      color:"#FF0000"
+    },
+    {
+      name:'OK',
+      data:numberOfRequestsData.oks,
+      color:"#4572A7"
+    }
+  ]
+});
+
+Highcharts.setOptions({
+  global: { useUTC: false }
+});
+
+var indicatorsChart = new Highcharts.Chart({
+  chart: {
+    renderTo: 'container_indicators',
+    marginRight: 150
+  },
+  credits: { enabled: false },
+  legend: { enabled: false },
+  title: { text: 'A title to let highcharts reserve the place for the title set later' },
+  xAxis: {
+    categories: [
+      pageStats.group1.name,
+      pageStats.group2.name,
+      pageStats.group3.name,
+      pageStats.group4.name
+    ]
+  },
+  yAxis: {
+    title: { text: 'Number of Requests' }
+  },
+  tooltip: {
+    formatter: function() {
+      var s;
+      if (this.point.name) { // the pie chart
+        s = ''+ this.point.name +': '+ this.y +'% requests';
+      } else {
+        s = ''+ this.y + ' requests';
+      }
+      return s;
+    }
+  },
+  plotOptions: {
+    series: {
+      stacking: 'normal',
+      shadow: true
+    }
+  },
+  series: [
+    {
+      type: 'column',
+      color: '#A0B228',
+      data: [pageStats.group1.count,0,0,0],
+      tooltip: { yDecimals: 0, ySuffix: 'ms' }
+    },
+    {
+      type: 'column',
+      color: '#FFDD00',
+      data: [0,pageStats.group2.count,0,0],
+      tooltip: { yDecimals: 0, ySuffix: 'ms' }
+    },
+    {
+      type: 'column',
+      color: '#FF9D00',
+      data: [0,0,pageStats.group3.count,0],
+      tooltip: { yDecimals: 0, ySuffix: 'ms' }
+    },
+    {
+      type: 'column',
+      color: '#FF0000',
+      data: [0,0,0,pageStats.group4.count],
+      tooltip: { yDecimals: 0, ySuffix: 'ms' }
+    },
+    {
+      type: 'pie',
+      name: 'Percentages',
+      data: [
+        {
+          name: pageStats.group1.name,
+          y: pageStats.group1.percentage,
+          color: '#A0B228'
+        },
+        {
+          name: pageStats.group2.name,
+          y: pageStats.group2.percentage,
+          color: '#FFDD00'
+        },
+        {
+          name: pageStats.group3.name,
+          y: pageStats.group3.percentage,
+          color: '#FF9D00'
+        },
+        {
+          name: pageStats.group4.name,
+          y: pageStats.group4.percentage,
+          color: '#FF0000'
+        }
+      ],
+      center: [470, 85],
+      size: 100,
+      showInLegend: false,
+      dataLabels: { enabled: false }
+    }
+  ]
+});
+
+indicatorsChart.setTitle({
+  text: '<span class="chart_title">Indicators</span>',
+  useHTML: true
+});
+
+	    $('#container_exceptions').sortable('#container_exceptions');
+    
+
+  function shortenNameAndDisplayFullOnHover(name){
+   if (name.length < 20)
+       return name;
+   else
+     return "<span class='tooltipContent'>"+name+"</span>" + name.substr(0,8)+"..."+name.substr(name.length-8,name.length);
+  }
+
+function generateHtmlRow(request, level, index, parent, group) {
+    if (request.name == 'Global Information')
+        var url = 'index.html';
+    else
+        var url = request.pathFormatted + '.html';
+
+    if (group)
+        var expandButtonStyle = '';
+    else
+        var expandButtonStyle = ' hidden';
+
+    if (request.stats.numberOfRequests.total != 0)
+        var koPercent = (request.stats.numberOfRequests.ko * 100 / request.stats.numberOfRequests.total).toFixed(0) + '%';
+    else
+        var koPercent = '-'
+
+    return '<tr id="' + request.pathFormatted + '" class="child-of-' + parent + '"> \
+        <td class="total col-1"> \
+            <span id="' + request.pathFormatted + '" style="margin-left: ' + (level * 10) + 'px;" class="expand-button' + expandButtonStyle + '">&nbsp;</span> \
+            <a href="' + url +'" class="withTooltip">' + shortenNameAndDisplayFullOnHover(request.name) + '</a><span class="value" style="display:none;">' + index + '</span> \
+        </td> \
+        <td class="value total col-2">' + request.stats.numberOfRequests.total + '</td> \
+        <td class="value ok col-3">' + request.stats.numberOfRequests.ok + '</td> \
+        <td class="value ko col-4">' + request.stats.numberOfRequests.ko + '</td> \
+        <td class="value ko col-5">' + koPercent + '</td> \
+        <td class="value total col-6">' + request.stats.meanNumberOfRequestsPerSecond.total + '</td> \
+        <td class="value total col-7">' + request.stats.minResponseTime.total + '</td> \
+        <td class="value total col-8">' + request.stats.percentiles1.total + '</td> \
+        <td class="value total col-9">' + request.stats.percentiles2.total + '</td> \
+        <td class="value total col-10">' + request.stats.percentiles3.total + '</td> \
+        <td class="value total col-11">' + request.stats.percentiles4.total + '</td> \
+        <td class="value total col-12">' + request.stats.maxResponseTime.total + '</td> \
+        <td class="value total col-13">' + request.stats.meanResponseTime.total + '</td> \
+        <td class="value total col-14">' + request.stats.standardDeviation.total + '</td> \
+        </tr>';
+}
+
+function generateHtmlRowsForGroup(group, level, index, parent) {
+    var buffer = '';
+
+    if (!parent)
+        parent = 'ROOT';
+    else {
+        buffer += generateHtmlRow(group, level - 1, index, parent, true);
+        index++;
+        parent = group.pathFormatted;
+    }
+
+    $.each(group.contents, function(contentName, content) {
+        if (content.type == 'GROUP') {
+            var result = generateHtmlRowsForGroup(content, level + 1, index, parent);
+            buffer += result.html;
+            index = result.index;
+        }
+        else if (content.type == 'REQUEST') {
+            buffer += generateHtmlRow(content, level, index, parent);
+            index++;
+        }
+    });
+
+    return { html: buffer, index: index };
+}
+
+$('#container_statistics_head tbody').append(generateHtmlRow(stats, 0, 0));
+
+var lines = generateHtmlRowsForGroup(stats, 0, 0)
+$('#container_statistics_body tbody').append(lines.html);
+
+$('#container_statistics_head').sortable('#container_statistics_body');
+$('.statistics').expandable();
+
+if (lines.index < 30) {
+    $('#statistics_title span').attr('style', 'display: none;');
+    $('#statistics_title').attr('style', 'cursor: auto;')
+}
+else {
+    $('#statistics_title').click(function(){
+        $(this).toggleClass('title_collapsed').toggleClass('title_not_collapsed');
+        $('#container_statistics_body').parent().toggleClass('scrollable').toggleClass('');
+    });
+}
+
+	    $('#container_errors').sortable('#container_errors');
+    
+allUsersData.yAxis = 0;
+
+var allUsersChart = new Highcharts.StockChart({
+  chart: {
+    renderTo: 'container_active_users',
+    zoomType: 'x'
+  },
+  credits: { enabled: false },
+  legend: {
+    enabled: true,
+    floating: true,
+    align: 'right',
+    verticalAlign: 'top',
+    layout: 'vertical',
+    borderWidth: 0,
+    itemStyle: { fontWeight: "normal" }
+  },
+  title: { text: 'A title to let highcharts reserve the place for the title set later' },
+  rangeSelector: {
+    buttonSpacing: 0,
+    buttonTheme: {
+      fill: 'LightGrey',
+      padding: 1,
+      stroke: 'Black',
+      'stroke-width': 0.25,
+      style: {
+        color: 'Black',
+        fontWeight: 'bold',
+      },
+      states: {
+        stroke: 'Black',
+        'stroke-width': 0.25,
+        hover: {
+          fill: 'DarkGrey',
+          style: { color: 'black' }
+        },
+        select: {
+          fill: 'DarkOrange',
+          style: { color: 'white' }
+        }
+      }
+    },
+    buttons : [
+      {
+        type : 'minute',
+        count : 1,
+        text : '1m'
+      }, {
+        type : 'minute',
+        count : 10,
+        text : '10m'
+      }, {
+        type : 'hour',
+        count : 1,
+        text : '1h'
+      }, {
+        type : 'all',
+        count : 1,
+        text : 'All'
+      }
+    ],
+    selected : 3,
+    inputEnabled : false
+  },
+  xAxis: {
+    type: 'datetime',
+    ordinal: false,
+    maxZoom: 10000 // three days
+  },
+  yAxis: {
+    title: { text: 'Number of Active Users' },
+    opposite: false,
+    min: 0
+  },
+  series: [
+    {
+color: '#4572A7',
+name: 'PlaintextGet',
+data: [
+  [1457440491000,1],[1457440492000,3],[1457440493000,6],[1457440494000,7],[1457440495000,10],[1457440496000,11],[1457440497000,13],[1457440498000,14],[1457440499000,15],[1457440500000,16],[1457440501000,18],[1457440502000,20],[1457440503000,23],[1457440504000,24],[1457440505000,25],[1457440506000,27],[1457440507000,29],[1457440508000,29],[1457440509000,32],[1457440510000,34],[1457440511000,36],[1457440512000,37],[1457440513000,39],[1457440514000,41],[1457440515000,42],[1457440516000,44],[1457440517000,46],[1457440518000,47],[1457440519000,48],[1457440520000,52],[1457440521000,53],[1457440522000,53],[1457440523000,53],[1457440524000,53],[1457440525000,53],[1457440526000,53],[1457440527000,53],[1457440528000,53],[1457440529000,54],[1457440530000,53],[1457440531000,53],[1457440532000,54],[1457440533000,53],[1457440534000,53],[1457440535000,53],[1457440536000,53],[1457440537000,53],[1457440538000,53],[1457440539000,53],[1457440540000,53],[1457440541000,53],[1457440542000,53],[1457440543000,54],[1457440544000,53],[1457440545000,53],[1457440546000,53],[1457440547000,53],[1457440548000,53],[1457440549000,53],[1457440550000,53],[1457440551000,54],[1457440552000,56],[1457440553000,58],[1457440554000,59],[1457440555000,60],[1457440556000,63],[1457440557000,62],[1457440558000,67],[1457440559000,70],[1457440560000,73],[1457440561000,76],[1457440562000,74],[1457440563000,78],[1457440564000,80],[1457440565000,81],[1457440566000,84],[1457440567000,92],[1457440568000,98],[1457440569000,113],[1457440570000,105],[1457440571000,103],[1457440572000,108],[1457440573000,109],[1457440574000,113],[1457440575000,120],[1457440576000,128],[1457440577000,139],[1457440578000,143],[1457440579000,155],[1457440580000,160],[1457440581000,75],[1457440582000,0],[1457440583000,0],[1457440584000,0],[1457440585000,0],[1457440586000,0],[1457440587000,0],[1457440588000,0],[1457440589000,0],[1457440590000,0],[1457440591000,0],[1457440592000,0],[1457440593000,0],[1457440594000,0],[1457440595000,0],[1457440596000,0],[1457440597000,0],[1457440598000,0],[1457440599000,0],[1457440600000,0],[1457440601000,0],[1457440602000,0],[1457440603000,0],[1457440604000,0],[1457440605000,0],[1457440606000,0],[1457440607000,0],[1457440608000,0],[1457440609000,0],[1457440610000,0],[1457440611000,50],[1457440612000,54],[1457440613000,54],[1457440614000,54],[1457440615000,54],[1457440616000,54],[1457440617000,53],[1457440618000,54],[1457440619000,54],[1457440620000,54],[1457440621000,54],[1457440622000,54],[1457440623000,54],[1457440624000,53],[1457440625000,54],[1457440626000,53],[1457440627000,54],[1457440628000,54],[1457440629000,54],[1457440630000,54],[1457440631000,54],[1457440632000,53],[1457440634000,54],[1457440635000,70],[1457440636000,54],[1457440637000,54],[1457440638000,54],[1457440639000,54],[1457440640000,54],[1457440641000,28]
+],
+tooltip: { yDecimals: 0, ySuffix: '', valueDecimals: 0 }},
+
+    allUsersData
+  ]
+});
+
+
+allUsersChart.setTitle({
+  text: '<span class="chart_title">Active Users along the Simulation</span>',
+  useHTML: true
+});
+
+allUsersData.yAxis = 1;
+
+var responseTimeDistributionChart = new Highcharts.Chart({
+  chart: {
+    renderTo: 'container_distrib',
+    type: 'column'
+  },
+  credits: {
+    enabled: false
+  },
+  legend: {
+    enabled: true,
+    floating: true,
+    y: -285,
+    borderWidth: 0,
+    itemStyle: {
+      fontWeight: "normal"
+    }
+  },
+  title: {
+    text: 'A title to let highcharts reserve the place for the title set later'
+  },
+  xAxis: {
+    categories: ['1', '4', '7', '10', '13', '16', '19', '22', '25', '28', '31', '34', '37', '39', '42', '45', '48', '51', '54', '57', '60', '63', '66', '69', '72', '74', '77', '80', '83', '86', '89', '92', '95', '98', '101', '104', '107', '109', '112', '115', '118', '121', '124', '127', '130', '133', '136', '139', '142', '145', '147', '150', '153', '156', '159', '162', '165', '168', '171', '174', '177', '180', '183', '185', '188', '191', '194', '197', '200', '203', '206', '209', '212', '215', '218', '220', '223', '226', '229', '232', '235', '238', '241', '244', '247', '250', '253', '256', '258', '261', '264', '267', '270', '273', '276', '279', '282', '285', '288', '291'],
+    tickInterval: 20
+  },
+  yAxis: {
+    min: 0,
+    title: {
+      text: 'Percentage of Requests'
+    }
+  },
+  tooltip: {
+    formatter: function() {
+      return '<b>'+ this.x +' ms</b><br/>'+
+      this.series.name +': '+ this.y +' %<br/>'+
+      'Total: '+ this.point.stackTotal + ' %';
+    }
+  },
+  plotOptions: {
+    series: {
+      groupPadding: 0,
+      stacking: 'normal',
+      shadow: true
+    }
+  },
+  series: [
+  	{
+type: 'column',
+color: '#4572A7',
+name: 'OK',
+data: [
+  99.31,0.44,0.14,0.06,0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+],
+tooltip: { yDecimals: 0, ySuffix: 'ms' }
+},
+  	{
+type: 'column',
+color: '#FF0000',
+name: 'KO',
+data: [
+  0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+],
+tooltip: { yDecimals: 0, ySuffix: 'ms' }
+}
+  ]
+});
+
+responseTimeDistributionChart.setTitle({
+  text: '<span class="chart_title">Response Time Distribution</span>',
+  useHTML: true
+});
+
+var responseTimePercentiles = unpack([[1457440491,[0,0,1,1,1,1,1,1,3,9]],[1457440492,[0,0,0,1,1,1,1,1,2,8]],[1457440493,[0,0,0,1,1,1,1,1,1,8]],[1457440494,[0,0,0,0,1,1,1,1,1,8]],[1457440495,[0,0,0,1,1,1,1,1,3,21]],[1457440496,[0,0,0,0,0,0,1,1,1,2]],[1457440497,[0,0,0,0,0,1,1,1,1,4]],[1457440498,[0,0,0,0,0,0,1,1,1,4]],[1457440499,[0,0,0,0,0,0,1,1,1,8]],[1457440500,[0,0,0,0,0,0,0,1,1,3]],[1457440501,[0,0,0,0,0,0,0,1,1,1]],[1457440502,[0,0,0,0,0,0,0,1,1,1]],[1457440503,[0,0,0,0,0,0,0,1,1,1]],[1457440504,[0,0,0,0,0,0,0,1,1,1]],[1457440505,[0,0,0,0,0,0,0,1,1,2]],[1457440506,[0,0,0,0,0,0,0,1,1,2]],[1457440507,[0,0,0,0,0,0,0,1,1,1]],[1457440508,[0,0,0,0,0,0,0,1,1,2]],[1457440509,[0,0,0,0,0,0,0,1,1,2]],[1457440510,[0,0,0,0,0,0,0,1,1,2]],[1457440511,[0,0,0,0,0,0,0,1,1,1]],[1457440512,[0,0,0,0,0,0,0,1,1,3]],[1457440513,[0,0,0,0,0,0,0,1,1,1]],[1457440514,[0,0,0,0,0,0,0,1,1,1]],[1457440515,[0,0,0,0,0,0,0,1,1,5]],[1457440516,[0,0,0,0,0,0,0,1,1,2]],[1457440517,[0,0,0,0,0,0,0,1,1,1]],[1457440518,[0,0,0,0,0,0,0,1,1,3]],[1457440519,[0,0,0,0,0,0,1,1,1,1]],[1457440520,[0,0,0,0,0,0,1,1,1,1]],[1457440521,[0,0,0,0,0,0,1,1,1,7]],[1457440522,[0,0,0,0,0,0,1,1,1,12]],[1457440523,[0,0,0,0,0,0,1,1,1,3]],[1457440524,[0,0,0,0,0,0,1,1,1,3]],[1457440525,[0,0,0,0,0,0,1,1,1,2]],[1457440526,[0,0,0,0,0,0,1,1,1,2]],[1457440527,[0,0,0,0,0,0,1,1,1,5]],[1457440528,[0,0,0,0,0,0,1,1,1,1]],[1457440529,[0,0,0,0,0,0,1,1,1,2]],[1457440530,[0,0,0,0,0,0,1,1,1,5]],[1457440531,[0,0,0,0,0,0,1,1,1,1]],[1457440532,[0,0,0,0,0,0,1,1,1,11]],[1457440533,[0,0,0,0,0,0,1,1,1,3]],[1457440534,[0,0,0,0,0,0,1,1,1,6]],[1457440535,[0,0,0,0,0,0,1,1,1,1]],[1457440536,[0,0,0,0,0,0,1,1,1,5]],[1457440537,[0,0,0,0,0,0,1,1,1,2]],[1457440538,[0,0,0,0,0,0,1,1,1,1]],[1457440539,[0,0,0,0,0,0,1,1,1,3]],[1457440540,[0,0,0,0,0,0,1,1,1,6]],[1457440541,[0,0,0,0,0,0,1,1,1,5]],[1457440542,[0,0,0,0,0,0,1,1,1,5]],[1457440543,[0,0,0,0,0,0,1,1,1,7]],[1457440544,[0,0,0,0,0,0,1,1,1,1]],[1457440545,[0,0,0,0,0,0,1,1,1,3]],[1457440546,[0,0,0,0,0,0,1,1,1,2]],[1457440547,[0,0,0,0,0,0,1,1,1,1]],[1457440548,[0,0,0,0,0,0,1,1,1,3]],[1457440549,[0,0,0,0,0,0,1,1,1,1]],[1457440550,[0,0,0,0,0,0,1,1,1,2]],[1457440551,[0,0,0,0,0,0,1,1,1,4]],[1457440552,[0,0,0,0,0,0,1,1,1,1]],[1457440553,[0,0,0,0,0,0,1,1,1,2]],[1457440554,[0,0,0,0,0,0,1,1,1,3]],[1457440555,[0,0,0,0,0,0,1,1,1,6]],[1457440556,[0,0,0,0,0,0,1,1,1,6]],[1457440557,[0,0,0,0,0,1,1,1,1,4]],[1457440558,[0,0,0,0,0,1,1,1,1,2]],[1457440559,[0,0,0,0,0,1,1,1,1,4]],[1457440560,[0,0,0,0,1,1,1,1,1,9]],[1457440561,[0,0,0,0,1,1,1,1,1,6]],[1457440562,[0,0,0,0,0,1,1,1,1,1]],[1457440563,[0,0,0,0,1,1,1,1,1,1]],[1457440564,[0,0,0,0,1,1,1,1,1,3]],[1457440565,[0,0,0,0,1,1,1,1,1,8]],[1457440566,[0,0,0,0,1,1,1,1,1,5]],[1457440567,[0,0,0,1,1,1,1,1,2,10]],[1457440568,[0,0,1,1,1,1,1,2,6,22]],[1457440569,[0,0,1,1,1,1,1,1,4,15]],[1457440570,[0,0,1,1,1,1,1,1,2,27]],[1457440571,[0,0,0,1,1,1,1,1,1,8]],[1457440572,[0,0,1,1,1,1,1,1,1,3]],[1457440573,[0,0,1,1,1,1,1,1,1,4]],[1457440574,[0,0,1,1,1,1,1,1,2,2]],[1457440575,[0,0,1,1,1,1,1,1,3,9]],[1457440576,[0,0,1,1,1,1,1,2,7,17]],[1457440577,[0,0,1,1,1,1,2,3,8,14]],[1457440578,[0,0,1,1,1,1,2,3,7,13]],[1457440579,[0,1,1,1,1,2,2,3,8,12]],[1457440580,[0,1,1,2,2,2,2,4,10,14]],[1457440581,[0,1,1,2,2,2,2,3,7,14]],[1457440582,null],[1457440583,null],[1457440584,null],[1457440585,null],[1457440586,null],[1457440587,null],[1457440588,null],[1457440589,null],[1457440590,null],[1457440591,null],[1457440592,null],[1457440593,null],[1457440594,null],[1457440595,null],[1457440596,null],[1457440597,null],[1457440598,null],[1457440599,null],[1457440600,null],[1457440601,null],[1457440602,null],[1457440603,null],[1457440604,null],[1457440605,null],[1457440606,null],[1457440607,null],[1457440608,null],[1457440609,null],[1457440610,null],[1457440611,[0,0,0,0,0,1,1,1,1,2]],[1457440612,[0,0,0,0,0,0,1,1,1,3]],[1457440613,[0,0,0,0,0,0,1,1,1,1]],[1457440614,[0,0,0,0,0,0,1,1,1,1]],[1457440615,[0,0,0,0,0,0,1,1,1,4]],[1457440616,[0,0,0,0,0,0,1,1,1,3]],[1457440617,[0,0,0,0,0,0,1,1,1,1]],[1457440618,[0,0,0,0,0,0,1,1,1,3]],[1457440619,[0,0,0,0,0,0,1,1,1,1]],[1457440620,[0,0,0,0,0,0,1,1,1,2]],[1457440621,[0,0,0,0,0,0,1,1,1,5]],[1457440622,[0,0,0,0,0,0,1,1,1,3]],[1457440623,[0,0,0,0,0,0,1,1,1,7]],[1457440624,[0,0,0,0,0,0,1,1,1,2]],[1457440625,[0,0,0,0,0,0,1,1,1,1]],[1457440626,[0,0,0,0,0,0,1,1,1,1]],[1457440627,[0,0,0,0,0,0,1,1,1,3]],[1457440628,[0,0,0,0,0,0,1,1,1,1]],[1457440629,[0,0,0,0,0,0,1,1,1,1]],[1457440630,[0,0,0,0,0,0,1,1,1,3]],[1457440631,[0,0,0,0,0,0,1,1,1,4]],[1457440632,[0,0,0,0,0,0,1,1,1,1]],[1457440633,[0,0,0,0,0,0,1,1,1,5]],[1457440634,[0,0,0,1,1,1,1,1,2,292]],[1457440635,[0,0,0,0,0,0,1,1,1,2]],[1457440636,[0,0,0,0,0,0,1,1,1,2]],[1457440637,[0,0,0,0,0,0,1,1,1,1]],[1457440638,[0,0,0,0,0,0,1,1,1,1]],[1457440639,[0,0,0,0,0,0,1,1,1,3]],[1457440640,[0,0,0,0,0,0,1,1,1,5]],[1457440641,[0,0,0,0,0,0,1,1,1,1]]]);
+
+var responseTimeChart = new Highcharts.StockChart({
+  chart: {
+    renderTo: 'container',
+    zoomType: 'x'
+  },
+  colors: ['#C4FD90', '#7FF77F', '#6FF2AD', '#60ECE5', '#51A8E7', '#4353E2', '#7335DC', '#BC28D7', '#D11C97', '#C73905', 'Orange'],
+  credits: { enabled: false },
+  legend: {
+    enabled: true,
+    floating: true,
+    y: -65,
+    borderWidth: 0,
+    itemStyle: { fontWeight: "normal" }
+  },
+  title: { text: 'A title to let highcharts reserve the place for the title set later' },
+  navigator: { baseSeries: 9 },
+  rangeSelector: {
+    rangeSelector: { align: "left" },
+    buttonSpacing: 0,
+    buttonTheme: {
+      fill: 'LightGrey',
+      padding: 1,
+      stroke: 'Black',
+      'stroke-width': 0.25,
+      style: {
+        color: 'Black',
+        fontWeight: 'bold',
+      },
+      states: {
+        stroke: 'Black',
+        'stroke-width': 0.25,
+        hover: {
+          fill: 'DarkGrey',
+          style: { color: 'black' }
+        },
+        select: {
+          fill: 'DarkOrange',
+          style: { color: 'white' }
+        }
+      }
+    },
+    buttons : [
+      {
+        type : 'minute',
+        count : 1,
+        text : '1m'
+      }, {
+        type : 'minute',
+        count : 10,
+        text : '10m'
+      }, {
+        type : 'hour',
+        count : 1,
+        text : '1h'
+      }, {
+        type : 'all',
+        count : 1,
+        text : 'All'
+      }
+    ],
+    selected : 3,
+    inputEnabled : false
+  },
+  xAxis: {
+    type: 'datetime',
+    ordinal: false,
+    maxZoom: 10000 // three days
+  },
+  yAxis:[
+    {
+      min: 0,
+      title: {
+        text: 'Response Time (ms)',
+        style: { color: '#4572A7' }
+      },
+      opposite: false
+    }, {
+      min: 0,
+      title: {
+        text: 'Active Users',
+        style: { color: '#FF9D00' }
+      },
+      opposite: true
+    }
+  ],
+  plotOptions: {
+    arearange: { lineWidth: 1 },
+    series: {
+      dataGrouping: { enabled: false }
+    }
+  },
+  series: [
+  
+    
+         {
+pointInterval: 1000,
+name: 'min',
+data: responseTimePercentiles[0],
+tooltip: { yDecimals: 0, ySuffix: 'ms' },
+type : 'area',
+yAxis: 0,
+zIndex: 10
+},
+         {
+pointInterval: 1000,
+name: '25%',
+data: responseTimePercentiles[1],
+tooltip: { yDecimals: 0, ySuffix: 'ms' },
+type : 'area',
+yAxis: 0,
+zIndex: 9
+},
+         {
+pointInterval: 1000,
+name: '50%',
+data: responseTimePercentiles[2],
+tooltip: { yDecimals: 0, ySuffix: 'ms' },
+type : 'area',
+yAxis: 0,
+zIndex: 8
+},
+         {
+pointInterval: 1000,
+name: '75%',
+data: responseTimePercentiles[3],
+tooltip: { yDecimals: 0, ySuffix: 'ms' },
+type : 'area',
+yAxis: 0,
+zIndex: 7
+},
+         {
+pointInterval: 1000,
+name: '80%',
+data: responseTimePercentiles[4],
+tooltip: { yDecimals: 0, ySuffix: 'ms' },
+type : 'area',
+yAxis: 0,
+zIndex: 6
+},
+         {
+pointInterval: 1000,
+name: '85%',
+data: responseTimePercentiles[5],
+tooltip: { yDecimals: 0, ySuffix: 'ms' },
+type : 'area',
+yAxis: 0,
+zIndex: 5
+},
+         {
+pointInterval: 1000,
+name: '90%',
+data: responseTimePercentiles[6],
+tooltip: { yDecimals: 0, ySuffix: 'ms' },
+type : 'area',
+yAxis: 0,
+zIndex: 4
+},
+         {
+pointInterval: 1000,
+name: '95%',
+data: responseTimePercentiles[7],
+tooltip: { yDecimals: 0, ySuffix: 'ms' },
+type : 'area',
+yAxis: 0,
+zIndex: 3
+},
+         {
+pointInterval: 1000,
+name: '99%',
+data: responseTimePercentiles[8],
+tooltip: { yDecimals: 0, ySuffix: 'ms' },
+type : 'area',
+yAxis: 0,
+zIndex: 2
+},
+         {
+pointInterval: 1000,
+name: 'max',
+data: responseTimePercentiles[9],
+tooltip: { yDecimals: 0, ySuffix: 'ms' },
+type : 'area',
+yAxis: 0,
+zIndex: 1
+},
+  allUsersData
+  ]
+});
+
+responseTimeChart.setTitle({
+  text: '<span class="chart_title chart_title_">Response Time Percentiles over Time (OK)</span>',
+  useHTML: true
+});
+
+var container_requests = unpack([[1457440491,[363,0, 363]],[1457440492,[603,0, 603]],[1457440493,[1638,0, 1638]],[1457440494,[2306,0, 2306]],[1457440495,[3090,0, 3090]],[1457440496,[3479,0, 3479]],[1457440497,[4327,0, 4327]],[1457440498,[5165,0, 5165]],[1457440499,[5613,0, 5613]],[1457440500,[6216,0, 6216]],[1457440501,[6785,0, 6785]],[1457440502,[7486,0, 7486]],[1457440503,[8470,0, 8470]],[1457440504,[8908,0, 8908]],[1457440505,[9425,0, 9425]],[1457440506,[10169,0, 10169]],[1457440507,[11068,0, 11068]],[1457440508,[11328,0, 11328]],[1457440509,[11903,0, 11903]],[1457440510,[12797,0, 12797]],[1457440511,[13611,0, 13611]],[1457440512,[14264,0, 14264]],[1457440513,[14680,0, 14680]],[1457440514,[15519,0, 15519]],[1457440515,[15812,0, 15812]],[1457440516,[16761,0, 16761]],[1457440517,[17528,0, 17528]],[1457440518,[17946,0, 17946]],[1457440519,[18418,0, 18418]],[1457440520,[19185,0, 19185]],[1457440521,[20024,0, 20024]],[1457440522,[19904,0, 19904]],[1457440523,[20038,0, 20038]],[1457440524,[20043,0, 20043]],[1457440525,[20035,0, 20035]],[1457440526,[19928,0, 19928]],[1457440527,[20042,0, 20042]],[1457440528,[20005,0, 20005]],[1457440529,[19968,0, 19968]],[1457440530,[20039,0, 20039]],[1457440531,[19982,0, 19982]],[1457440532,[20019,0, 20019]],[1457440533,[20005,0, 20005]],[1457440534,[19724,0, 19724]],[1457440535,[20282,0, 20282]],[1457440536,[19985,0, 19985]],[1457440537,[19994,0, 19994]],[1457440538,[19999,0, 19999]],[1457440539,[19991,0, 19991]],[1457440540,[19997,0, 19997]],[1457440541,[20019,0, 20019]],[1457440542,[19996,0, 19996]],[1457440543,[19954,0, 19954]],[1457440544,[20039,0, 20039]],[1457440545,[20014,0, 20014]],[1457440546,[19982,0, 19982]],[1457440547,[20004,0, 20004]],[1457440548,[20024,0, 20024]],[1457440549,[19979,0, 19979]],[1457440550,[19999,0, 19999]],[1457440551,[20001,0, 20001]],[1457440552,[20409,0, 20409]],[1457440553,[21277,0, 21277]],[1457440554,[22102,0, 22102]],[1457440555,[22331,0, 22331]],[1457440556,[23660,0, 23660]],[1457440557,[23608,0, 23608]],[1457440558,[24590,0, 24590]],[1457440559,[25437,0, 25437]],[1457440560,[25566,0, 25566]],[1457440561,[26940,0, 26940]],[1457440562,[27234,0, 27234]],[1457440563,[27622,0, 27622]],[1457440564,[28890,0, 28890]],[1457440565,[28966,0, 28966]],[1457440566,[29547,0, 29547]],[1457440567,[30385,0, 30385]],[1457440568,[26184,0, 26184]],[1457440569,[35607,0, 35607]],[1457440570,[32919,0, 32919]],[1457440571,[32971,0, 32971]],[1457440572,[33977,0, 33977]],[1457440573,[34576,0, 34576]],[1457440574,[34577,0, 34577]],[1457440575,[35275,0, 35275]],[1457440576,[35647,0, 35647]],[1457440577,[35461,0, 35461]],[1457440578,[36871,0, 36871]],[1457440579,[37328,0, 37328]],[1457440580,[36070,0, 36070]],[1457440581,[34295,0, 34295]],[1457440582,[0,0, 0]],[1457440583,[0,0, 0]],[1457440584,[0,0, 0]],[1457440585,[0,0, 0]],[1457440586,[0,0, 0]],[1457440587,[0,0, 0]],[1457440588,[0,0, 0]],[1457440589,[0,0, 0]],[1457440590,[0,0, 0]],[1457440591,[0,0, 0]],[1457440592,[0,0, 0]],[1457440593,[0,0, 0]],[1457440594,[0,0, 0]],[1457440595,[0,0, 0]],[1457440596,[0,0, 0]],[1457440597,[0,0, 0]],[1457440598,[0,0, 0]],[1457440599,[0,0, 0]],[1457440600,[0,0, 0]],[1457440601,[0,0, 0]],[1457440602,[0,0, 0]],[1457440603,[0,0, 0]],[1457440604,[0,0, 0]],[1457440605,[0,0, 0]],[1457440606,[0,0, 0]],[1457440607,[0,0, 0]],[1457440608,[0,0, 0]],[1457440609,[0,0, 0]],[1457440610,[0,0, 0]],[1457440611,[9241,0, 9241]],[1457440612,[19924,0, 19924]],[1457440613,[20103,0, 20103]],[1457440614,[19975,0, 19975]],[1457440615,[19994,0, 19994]],[1457440616,[20014,0, 20014]],[1457440617,[20017,0, 20017]],[1457440618,[19996,0, 19996]],[1457440619,[19981,0, 19981]],[1457440620,[19992,0, 19992]],[1457440621,[20017,0, 20017]],[1457440622,[19992,0, 19992]],[1457440623,[19805,0, 19805]],[1457440624,[20159,0, 20159]],[1457440625,[20068,0, 20068]],[1457440626,[19976,0, 19976]],[1457440627,[19972,0, 19972]],[1457440628,[20026,0, 20026]],[1457440629,[20001,0, 20001]],[1457440630,[20002,0, 20002]],[1457440631,[20008,0, 20008]],[1457440632,[19998,0, 19998]],[1457440633,[19731,0, 19731]],[1457440634,[19924,0, 19924]],[1457440635,[20343,0, 20343]],[1457440636,[20032,0, 20032]],[1457440637,[19981,0, 19981]],[1457440638,[19982,0, 19982]],[1457440639,[19997,0, 19997]],[1457440640,[20010,0, 20010]],[1457440641,[10739,0, 10739]]]);
+
+var requestsChart = new Highcharts.StockChart({
+  chart: {
+    renderTo: 'container_requests',
+    zoomType: 'x'
+  },
+  credits: { enabled: false },
+  legend: {
+    enabled: true,
+    floating: true,
+    itemDistance: 10,
+    y: -285,
+    borderWidth: 0,
+    itemStyle: { fontWeight: "normal" }
+  },
+  title: { text: 'A title to let highcharts reserve the place for the title set later' },
+  rangeSelector: {
+    buttonSpacing: 0,
+    buttonTheme: {
+      fill: 'LightGrey',
+      padding: 1,
+      stroke: 'Black',
+      'stroke-width': 0.25,
+      style: {
+        color: 'Black',
+        fontWeight: 'bold',
+      },
+      states: {
+        stroke: 'Black',
+        'stroke-width': 0.25,
+        hover: {
+          fill: 'DarkGrey',
+          style: { color: 'black' }
+         },
+         select: {
+          fill: 'DarkOrange',
+          style: { color: 'white' }
+        }
+      }
+    },
+    buttons : [
+      {
+        type : 'minute',
+        count : 1,
+        text : '1m'
+      }, {
+        type : 'minute',
+        count : 10,
+        text : '10m'
+      }, {
+        type : 'hour',
+        count : 1,
+        text : '1h'
+      }, {
+        type : 'all',
+        count : 1,
+        text : 'All'
+      }
+    ],
+    selected : 3,
+    inputEnabled : false
+  },
+  plotOptions: {
+    series: {
+      dataGrouping: { enabled: false }
+    },
+    area: {
+      stacking: 'normal'
+    }
+  },
+  xAxis: {
+    type: 'datetime',
+    ordinal: false,
+    maxZoom: 10000 // three days
+  },
+  yAxis:[
+    {
+      min: 0,
+      title: {
+        text: 'Number of requests',
+        style: { color: '#4572A7' }
+      },
+      opposite: false
+    }, {
+      min: 0,
+      title: {
+        text: 'Active Users',
+        style: { color: '#FF9D00' }
+      },
+      opposite: true
+    }
+  ],
+  series: [
+    {
+color: '#4572A7',
+name: 'All',
+data: container_requests[0],
+tooltip: { yDecimals: 0, ySuffix: '', valueDecimals: 0 }
+,type: 'area'},
+    allUsersData
+  ]
+});
+
+requestsChart.setTitle({
+  text: '<span class="chart_title">Number of requests per second</span>',
+  useHTML: true
+});
+
+var container_responses = unpack([[1457440491,[362,0, 362]],[1457440492,[603,0, 603]],[1457440493,[1639,0, 1639]],[1457440494,[2305,0, 2305]],[1457440495,[3091,0, 3091]],[1457440496,[3478,0, 3478]],[1457440497,[4328,0, 4328]],[1457440498,[5164,0, 5164]],[1457440499,[5613,0, 5613]],[1457440500,[6217,0, 6217]],[1457440501,[6784,0, 6784]],[1457440502,[7487,0, 7487]],[1457440503,[8469,0, 8469]],[1457440504,[8907,0, 8907]],[1457440505,[9426,0, 9426]],[1457440506,[10169,0, 10169]],[1457440507,[11068,0, 11068]],[1457440508,[11329,0, 11329]],[1457440509,[11901,0, 11901]],[1457440510,[12798,0, 12798]],[1457440511,[13610,0, 13610]],[1457440512,[14265,0, 14265]],[1457440513,[14679,0, 14679]],[1457440514,[15519,0, 15519]],[1457440515,[15813,0, 15813]],[1457440516,[16759,0, 16759]],[1457440517,[17528,0, 17528]],[1457440518,[17946,0, 17946]],[1457440519,[18421,0, 18421]],[1457440520,[19185,0, 19185]],[1457440521,[20021,0, 20021]],[1457440522,[19905,0, 19905]],[1457440523,[20038,0, 20038]],[1457440524,[20043,0, 20043]],[1457440525,[20034,0, 20034]],[1457440526,[19930,0, 19930]],[1457440527,[20042,0, 20042]],[1457440528,[20003,0, 20003]],[1457440529,[19970,0, 19970]],[1457440530,[20037,0, 20037]],[1457440531,[19982,0, 19982]],[1457440532,[20019,0, 20019]],[1457440533,[20006,0, 20006]],[1457440534,[19724,0, 19724]],[1457440535,[20281,0, 20281]],[1457440536,[19986,0, 19986]],[1457440537,[19995,0, 19995]],[1457440538,[19999,0, 19999]],[1457440539,[19989,0, 19989]],[1457440540,[19997,0, 19997]],[1457440541,[20020,0, 20020]],[1457440542,[19995,0, 19995]],[1457440543,[19954,0, 19954]],[1457440544,[20040,0, 20040]],[1457440545,[20013,0, 20013]],[1457440546,[19984,0, 19984]],[1457440547,[20004,0, 20004]],[1457440548,[20022,0, 20022]],[1457440549,[19979,0, 19979]],[1457440550,[20001,0, 20001]],[1457440551,[19999,0, 19999]],[1457440552,[20408,0, 20408]],[1457440553,[21278,0, 21278]],[1457440554,[22100,0, 22100]],[1457440555,[22331,0, 22331]],[1457440556,[23661,0, 23661]],[1457440557,[23607,0, 23607]],[1457440558,[24589,0, 24589]],[1457440559,[25436,0, 25436]],[1457440560,[25567,0, 25567]],[1457440561,[26940,0, 26940]],[1457440562,[27233,0, 27233]],[1457440563,[27623,0, 27623]],[1457440564,[28887,0, 28887]],[1457440565,[28967,0, 28967]],[1457440566,[29546,0, 29546]],[1457440567,[30382,0, 30382]],[1457440568,[26159,0, 26159]],[1457440569,[35627,0, 35627]],[1457440570,[32926,0, 32926]],[1457440571,[32960,0, 32960]],[1457440572,[33997,0, 33997]],[1457440573,[34555,0, 34555]],[1457440574,[34585,0, 34585]],[1457440575,[35259,0, 35259]],[1457440576,[35638,0, 35638]],[1457440577,[35460,0, 35460]],[1457440578,[36863,0, 36863]],[1457440579,[37351,0, 37351]],[1457440580,[36035,0, 36035]],[1457440581,[34355,0, 34355]],[1457440582,[0,0, 0]],[1457440583,[0,0, 0]],[1457440584,[0,0, 0]],[1457440585,[0,0, 0]],[1457440586,[0,0, 0]],[1457440587,[0,0, 0]],[1457440588,[0,0, 0]],[1457440589,[0,0, 0]],[1457440590,[0,0, 0]],[1457440591,[0,0, 0]],[1457440592,[0,0, 0]],[1457440593,[0,0, 0]],[1457440594,[0,0, 0]],[1457440595,[0,0, 0]],[1457440596,[0,0, 0]],[1457440597,[0,0, 0]],[1457440598,[0,0, 0]],[1457440599,[0,0, 0]],[1457440600,[0,0, 0]],[1457440601,[0,0, 0]],[1457440602,[0,0, 0]],[1457440603,[0,0, 0]],[1457440604,[0,0, 0]],[1457440605,[0,0, 0]],[1457440606,[0,0, 0]],[1457440607,[0,0, 0]],[1457440608,[0,0, 0]],[1457440609,[0,0, 0]],[1457440610,[0,0, 0]],[1457440611,[9240,0, 9240]],[1457440612,[19923,0, 19923]],[1457440613,[20103,0, 20103]],[1457440614,[19973,0, 19973]],[1457440615,[19995,0, 19995]],[1457440616,[20015,0, 20015]],[1457440617,[20016,0, 20016]],[1457440618,[19996,0, 19996]],[1457440619,[19980,0, 19980]],[1457440620,[19994,0, 19994]],[1457440621,[20016,0, 20016]],[1457440622,[19991,0, 19991]],[1457440623,[19805,0, 19805]],[1457440624,[20159,0, 20159]],[1457440625,[20070,0, 20070]],[1457440626,[19975,0, 19975]],[1457440627,[19975,0, 19975]],[1457440628,[20022,0, 20022]],[1457440629,[20003,0, 20003]],[1457440630,[20000,0, 20000]],[1457440631,[20011,0, 20011]],[1457440632,[19996,0, 19996]],[1457440633,[19731,0, 19731]],[1457440634,[19921,0, 19921]],[1457440635,[20346,0, 20346]],[1457440636,[20034,0, 20034]],[1457440637,[19980,0, 19980]],[1457440638,[19981,0, 19981]],[1457440639,[19996,0, 19996]],[1457440640,[20013,0, 20013]],[1457440641,[10740,0, 10740]]]);
+
+var requestsChart = new Highcharts.StockChart({
+  chart: {
+    renderTo: 'container_responses',
+    zoomType: 'x'
+  },
+  credits: { enabled: false },
+  legend: {
+    enabled: true,
+    floating: true,
+    itemDistance: 10,
+    y: -285,
+    borderWidth: 0,
+    itemStyle: { fontWeight: "normal" }
+  },
+  title: { text: 'A title to let highcharts reserve the place for the title set later' },
+  rangeSelector: {
+    buttonSpacing: 0,
+    buttonTheme: {
+      fill: 'LightGrey',
+      padding: 1,
+      stroke: 'Black',
+      'stroke-width': 0.25,
+      style: {
+        color: 'Black',
+        fontWeight: 'bold',
+      },
+      states: {
+        stroke: 'Black',
+        'stroke-width': 0.25,
+        hover: {
+          fill: 'DarkGrey',
+          style: { color: 'black' }
+         },
+         select: {
+          fill: 'DarkOrange',
+          style: { color: 'white' }
+        }
+      }
+    },
+    buttons : [
+      {
+        type : 'minute',
+        count : 1,
+        text : '1m'
+      }, {
+        type : 'minute',
+        count : 10,
+        text : '10m'
+      }, {
+        type : 'hour',
+        count : 1,
+        text : '1h'
+      }, {
+        type : 'all',
+        count : 1,
+        text : 'All'
+      }
+    ],
+    selected : 3,
+    inputEnabled : false
+  },
+  plotOptions: {
+    series: {
+      dataGrouping: { enabled: false }
+    },
+    area: {
+      stacking: 'normal'
+    }
+  },
+  xAxis: {
+    type: 'datetime',
+    ordinal: false,
+    maxZoom: 10000 // three days
+  },
+  yAxis:[
+    {
+      min: 0,
+      title: {
+        text: 'Number of responses',
+        style: { color: '#4572A7' }
+      },
+      opposite: false
+    }, {
+      min: 0,
+      title: {
+        text: 'Active Users',
+        style: { color: '#FF9D00' }
+      },
+      opposite: true
+    }
+  ],
+  series: [
+    {
+color: '#4572A7',
+name: 'All',
+data: container_responses[0],
+tooltip: { yDecimals: 0, ySuffix: '', valueDecimals: 0 }
+},
+{
+color: '#FF0000',
+name: 'KO',
+data: container_responses[1],
+tooltip: { yDecimals: 0, ySuffix: '', valueDecimals: 0 }
+,type: 'area'},
+{
+color: '#A0B228',
+name: 'OK',
+data: container_responses[2],
+tooltip: { yDecimals: 0, ySuffix: '', valueDecimals: 0 }
+,type: 'area'},
+    allUsersData,
+{
+  
+type: 'pie',
+name: 'Distribution',
+data: [
+  {name: 'OK', y: 2405200.0, color: '#A0B228'},{name: 'KO', y: 0.0, color: '#FF0000'}
+],
+center: [775, -40],
+size: 70,
+showInLegend: false,
+dataLabels: { enabled: false },
+dataGrouping: { enabled: false }
+
+}
+
+  ]
+});
+
+requestsChart.setTitle({
+  text: '<span class="chart_title">Number of responses per second</span>',
+  useHTML: true
+});
+
+    });
+</script>
+</body>
+</html>
