@@ -1,6 +1,7 @@
 package com.plokhotnyuk.play
 
 import javax.inject.Singleton
+import akka.stream.scaladsl.Source
 import play.api.mvc._
 import play.api.libs.json.Json
 
@@ -12,6 +13,10 @@ class Application extends Controller {
 
   val plaintext = Action {
     Ok("Hello, World!")
+  }
+
+  val chunked = Action {
+    Ok.chunked(Source.single("Hello, World!"))
   }
 }
 
