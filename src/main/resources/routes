@@ -5,3 +5,4 @@
 # Home page
 GET     /json                           @com.plokhotnyuk.play.Application.json
 GET     /plaintext                      @com.plokhotnyuk.play.Application.plaintext
+GET     /chunked                        @com.plokhotnyuk.play.Application.chunked
