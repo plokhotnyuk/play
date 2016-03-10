@@ -11,7 +11,6 @@ libraryDependencies ++= Seq(
   "io.gatling" % "gatling-test-framework" % "2.2.0-SNAPSHOT" % "test",
   "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.2.0-SNAPSHOT" % "test"
 )
-routesGenerator := InjectedRoutesGenerator
 javaOptions in Gatling := Seq(
   "-server",
   "-Xms1g",

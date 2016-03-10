@@ -7,24 +7,27 @@ import akka.util.ByteString
 import play.api.libs.streams.Accumulator
 import play.api.mvc._
 
-@Singleton
-class MetricsController extends Controller {
+class MetricsController @Inject() (metricsRegistry: MetricsRegistry) extends Controller {
+  println("MetricsController")
   val metrics = Action {
-    Ok(Metrics.cnt.get.toString)
+    Ok(metricsRegistry.requestCounter.get.toString)
   }
 }
 
 trait MetricsFilter extends EssentialFilter
 
-class MetricsFilterImpl @Inject() extends MetricsFilter {
+class MetricsFilterImpl @Inject() (metricsRegistry: MetricsRegistry) extends MetricsFilter {
+  println("MetricsFilterImpl")
   def apply(nextFilter: EssentialAction) = new EssentialAction {
     override def apply(rh: RequestHeader): Accumulator[ByteString, Result] = {
-      Metrics.cnt.incrementAndGet()
+      metricsRegistry.requestCounter.incrementAndGet()
       nextFilter(rh)
     }
   }
 }
 
-object Metrics {
-  val cnt = new AtomicLong
+@Singleton
+class MetricsRegistry {
+  println("MetricsRegistry")
+  val requestCounter = new AtomicLong
 }
