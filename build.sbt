@@ -1,15 +1,18 @@
 name := "play"
 organization := "com.github.plokhotnyuk"
 version := "1.0-SNAPSHOT"
-scalaVersion := "2.11.7"
+scalaVersion := "2.11.8"
 val root = (project in file("."))
   .enablePlugins(PlayScala)
   .enablePlugins(GatlingPlugin)
   .disablePlugins(PlayLayoutPlugin)
 libraryDependencies ++= Seq(
-  ws,
-  "io.gatling" % "gatling-test-framework" % "2.2.0-SNAPSHOT" % "test",
-  "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.2.0-SNAPSHOT" % "test"
+  "com.typesafe.play" %% "play-ws" % "2.5.2",
+  "com.typesafe.akka" %% "akka-actor" % "2.4.3",
+  "io.netty" % "netty-codec-http" % "4.0.36.Final",
+  "io.netty" % "netty-transport-native-epoll" % "4.0.36.Final" classifier "linux-x86_64",
+  "io.gatling" % "gatling-test-framework" % "2.2.0" % "test",
+  "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.2.0" % "test"
 )
 javaOptions in Gatling := Seq(
   "-server",

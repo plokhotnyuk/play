@@ -3,6 +3,7 @@
 # ~~~~
 
 # Home page
-GET     /json                           microservice.HelloWorldController.json
-GET     /plaintext                      microservice.HelloWorldController.plaintext
-GET     /metrics                        microservice.MetricsController.metrics
+GET     /json                           microservice.HelloWorldController.jsonGet
+GET     /plaintext                      microservice.HelloWorldController.plaintextGet
+POST    /json                           microservice.HelloWorldController.jsonPost
+POST    /plaintext                      microservice.HelloWorldController.plaintextPost

@@ -4,7 +4,7 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import scala.concurrent.duration._
 
-class JsonRouteGatlingTest extends Simulation {
+class PlaintextGetRouteGatlingTest extends Simulation {
   val lowScenariosMsgsPerSecond = 20000
   val lowScenariosConnectionsPerSecond = 50
   val stressScenariosConnectionsPerSecond = 100
@@ -13,14 +13,14 @@ class JsonRouteGatlingTest extends Simulation {
     .baseURL("http://localhost:9000")
     .maxConnectionsPerHost(1)
     .shareConnections
-  val jsonGet = repeat(msgsPerSecondPerConnection)(exec(
-    http("json_GET")
-      .get("/json")
+  val plaintextGet = repeat(msgsPerSecondPerConnection)(exec(
+    http("plaintext_GET")
+      .get("/plaintext")
       .check(status.in(200))
   ))
   val partDuration = 30.seconds
-  setUp(scenario("JsonGet")
-    .exec(jsonGet)
+  setUp(scenario("PlaintextGet")
+    .exec(plaintextGet)
     .inject(
       rampUsersPerSec(1) to lowScenariosConnectionsPerSecond during partDuration,
       constantUsersPerSec(lowScenariosConnectionsPerSecond) during partDuration,

@@ -18,8 +18,6 @@ This project provides examples how to test simplest request and configure both s
 - sbt: 0.13.x
 
 ## Building & running benchmarks
-NOTE: until Gatling plugin & libraries for version 2.2.x released you should clone, build it & publish to the local repository for yourself.
-
 1. Build & run server
 ```sh
 sbt clean stage

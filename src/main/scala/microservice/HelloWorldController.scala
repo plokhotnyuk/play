@@ -1,17 +1,27 @@
 package microservice
 
 import javax.inject.Singleton
+import play.api.libs.json.Json._
 import play.api.mvc._
-import play.api.libs.json.Json
 
 @Singleton
 class HelloWorldController extends Controller {
-  val json = Action {
-    Ok(Json.toJson(HelloWorld("Hello, World!"))(Json.writes[HelloWorld]))
+  implicit val helloWorldFormat = format[HelloWorld]
+
+  val jsonGet = Action {
+    Ok(toJson(HelloWorld("Hello, World!")))
   }
 
-  val plaintext = Action {
+  val plaintextGet = Action {
     Ok("Hello, World!")
+  }
+
+  val jsonPost = Action(parse.json) { request =>
+    Ok(toJson(request.body))
+  }
+
+  val plaintextPost = Action(parse.tolerantText) { request =>
+    Ok(request.body)
   }
 }
 
