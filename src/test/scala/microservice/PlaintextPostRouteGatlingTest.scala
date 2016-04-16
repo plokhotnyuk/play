@@ -16,7 +16,7 @@ class PlaintextPostRouteGatlingTest extends Simulation {
   val plaintextPost = repeat(msgsPerSecondPerConnection)(exec(
     http("plaintext_POST")
       .post("/plaintext")
-      .body(StringBody("Hello World!"))
+      .body(StringBody("Hello, World!"))
       .check(status.in(200))
   ))
   val partDuration = 30.seconds

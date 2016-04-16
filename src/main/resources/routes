@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-GET     /json                           microservice.HelloWorldController.jsonGet
 GET     /plaintext                      microservice.HelloWorldController.plaintextGet
-POST    /json                           microservice.HelloWorldController.jsonPost
 POST    /plaintext                      microservice.HelloWorldController.plaintextPost
+GET     /json                           microservice.HelloWorldController.jsonGet
+POST    /json                           microservice.HelloWorldController.jsonPost

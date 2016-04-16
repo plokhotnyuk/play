@@ -16,7 +16,7 @@ class JsonPostRouteGatlingTest extends Simulation {
   val jsonPost = repeat(msgsPerSecondPerConnection)(exec(
     http("json_POST")
       .post("/json")
-      .body(StringBody("""{"message":"Hello World!"}"""))
+      .body(StringBody("""{"message":"Hello, World!"}"""))
       .asJSON
       .check(status.in(200))
   ))
