@@ -1,0 +1,10 @@
+{
+  "simulation": "microservice.JsonPostRouteGatlingTest",
+  "simulationId": "jsonpostroutegatlingtest",
+  "start": 1460982651107,
+  "description": "",
+  "scenarios": ["JsonPost"],
+  "assertions": [
+
+  ]
+}

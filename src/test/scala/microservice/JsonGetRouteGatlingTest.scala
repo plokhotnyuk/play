@@ -5,7 +5,7 @@ import io.gatling.http.Predef._
 import scala.concurrent.duration._
 
 class JsonGetRouteGatlingTest extends Simulation {
-  val lowScenariosMsgsPerSecond = 20000
+  val lowScenariosMsgsPerSecond = 25000
   val lowScenariosConnectionsPerSecond = 50
   val stressScenariosConnectionsPerSecond = 100
   val msgsPerSecondPerConnection = lowScenariosMsgsPerSecond / lowScenariosConnectionsPerSecond

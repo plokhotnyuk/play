@@ -1,0 +1,10 @@
+{
+  "simulation": "microservice.PlaintextGetRouteGatlingTest",
+  "simulationId": "plaintextgetroutegatlingtest",
+  "start": 1460982399084,
+  "description": "",
+  "scenarios": ["PlaintextGet"],
+  "assertions": [
+
+  ]
+}
