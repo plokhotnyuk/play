@@ -3,8 +3,8 @@ organization := "com.github.plokhotnyuk"
 version := "1.0-SNAPSHOT"
 scalaVersion := "2.11.8"
 val root = (project in file("."))
-  .enablePlugins(PlayScala, PlayNettyServer)
-  .disablePlugins(PlayAkkaHttpServer)
+  .enablePlugins(PlayScala, PlayAkkaHttpServer)
+  .disablePlugins(PlayNettyServer)
   .enablePlugins(GatlingPlugin)
   .disablePlugins(PlayLayoutPlugin)
 libraryDependencies ++= Seq(
