@@ -1,21 +1,22 @@
 name := "play"
 organization := "com.github.plokhotnyuk"
 version := "1.0-SNAPSHOT"
-scalaVersion := "2.12.3"
+scalaVersion := "2.12.6"
 val root = (project in file("."))
   .enablePlugins(PlayScala, PlayNettyServer)
   .disablePlugins(PlayAkkaHttpServer)
   .disablePlugins(PlayLayoutPlugin)
 libraryDependencies ++= Seq(
   guice,
-  "com.typesafe.play" %% "play-ws" % "2.6.6"
+  "com.typesafe.play" %% "play-ws" % "2.6.13"
 )
 javaOptions := Seq(
   "-server",
-  "-Xms1g",
-  "-Xmx1g",
-  "-XX:NewSize=512m",
-  "-XX:ReservedCodeCacheSize=128m",
+  "-Xms2g",
+  "-Xmx2g",
+  "-XX:NewSize=1g",
+  "-XX:MaxNewSize=1g",
+  "-XX:ReservedCodeCacheSize=512m",
   "-XX:+UseG1GC",
   "-XX:MaxGCPauseMillis=10",
   "-XX:+UseNUMA",
