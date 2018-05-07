@@ -6,7 +6,8 @@
 ───────╚═╝║  ╚╗║╚═╝║
 ```
 
-Evaluation of Play 2.6 API and performance using Wrk 2.
+Evaluation of [Play](https://github.com/playframework/playframework) 2.6 API and performance using 
+[Wrk 2](https://github.com/giltene/wrk2).
 
 This project provides examples how to test simplest request and configure server side for better response times and minimal CPU usage:
 
@@ -38,7 +39,8 @@ Plain test POST:
 ```sh
 ./wrk -c50 -d1m -t4 -R30000 -L -v -s src/test/lua/plaintextPost.lua http://localhost:9000/plaintext 
 ```
-## Result of benchmarks
-Please see `results` directory for benchmark reports on following environment:
 
-Intel(R) Core(TM) i7-2760QM CPU @ 2.40GHz (max 3.50GHz), RAM 16Gb DDR3-1600, Ubuntu 15.04, Linux 4.4.0-38-generic, Oracle JDK build 1.8.0_112-b15 64-bit
+## Result of benchmarks
+Please see `results` directory for benchmark results using different JDK and GraalVM versions on the following env.:
+Intel® Core™ i7-7700HQ CPU @ 2.8GHz (max 3.8GHz), RAM 16Gb DDR4-2400, Ubuntu 18.04, latest versions of Oracle JDK 8/10 
+and GraalVM CE/EE
