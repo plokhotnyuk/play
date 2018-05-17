@@ -12,13 +12,54 @@ Evaluation of [Play](https://github.com/playframework/playframework) 2.6 API and
 This project provides examples how to test simplest request and configure server side for better response times and minimal CPU usage:
 
 ## Building & running benchmarks
-1. Build & run server
+
+### Build the server
+
 ```sh
 sbt clean stage
+sed -i -e 's/1.6/1/g' ./target/universal/stage/bin/play
+```
+
+### Run the server
+
+- JDK 8:
+```sh
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+export JAVA_OPTS="-server -Xms2g -Xmx2g -XX:NewSize=1g -XX:MaxNewSize=1g -XX:+UseParallelGC -XX:-UseBiasedLocking -XX:+AlwaysPreTouch"
 ./target/universal/stage/bin/play
 ```
 
-2. Run benchmarks
+- JDK 10:
+```sh
+export JAVA_HOME=/usr/lib/jvm/jdk-10
+export JAVA_OPTS="-server -Xms2g -Xmx2g -XX:NewSize=1g -XX:MaxNewSize=1g -XX:+UseParallelGC -XX:-UseBiasedLocking -XX:+AlwaysPreTouch"
+./target/universal/stage/bin/play
+```
+
+- JDK 10 + Graal:
+```sh
+export JAVA_HOME=/usr/lib/jvm/jdk-10
+export JAVA_OPTS="-server -Xms2g -Xmx2g -XX:NewSize=1g -XX:MaxNewSize=1g -XX:+UseParallelGC -XX:-UseBiasedLocking -XX:+AlwaysPreTouch -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCI -XX:+UseJVMCICompiler"
+./target/universal/stage/bin/play
+```
+
+- GraalVM CE:
+```sh
+export JAVA_HOME=/usr/lib/jvm/graalvm-ce-1.0.0-rc1
+export JAVA_OPTS="-server -Xms2g -Xmx2g -XX:NewSize=1g -XX:MaxNewSize=1g -XX:+UseParallelGC -XX:-UseBiasedLocking -XX:+AlwaysPreTouch"
+./target/universal/stage/bin/play
+```
+
+- GraalVM EE:
+```sh
+export JAVA_HOME=/usr/lib/jvm/graalvm-ee-1.0.0-rc1
+export JAVA_OPTS="-server -Xms2g -Xmx2g -XX:NewSize=1g -XX:MaxNewSize=1g -XX:+UseParallelGC -XX:-UseBiasedLocking -XX:+AlwaysPreTouch"
+./target/universal/stage/bin/play
+```
+
+### Run benchmarks
+
+Server need to be warmed up before to be able handle max request rate. Use option `-R` with half of max value for that.
 
 JSON GET:
 ```sh
@@ -41,6 +82,6 @@ Plain test POST:
 ```
 
 ## Result of benchmarks
-Please see `results` directory for benchmark results using different JDK and GraalVM versions on the following env.:
-Intel® Core™ i7-7700HQ CPU @ 2.8GHz (max 3.8GHz), RAM 16Gb DDR4-2400, Ubuntu 18.04, latest versions of Oracle JDK 8/10 
-and GraalVM CE/EE
+Please see [results](https://github.com/plokhotnyuk/play/tree/master/results/wrk2) directory for benchmark results using 
+different JDK and GraalVM versions on the following environment: Intel® Core™ i7-7700HQ CPU @ 2.8GHz (max 3.8GHz), 
+RAM 16Gb DDR4-2400, Ubuntu 18.04, latest versions of Oracle JDK 8/10 and GraalVM CE/EE
