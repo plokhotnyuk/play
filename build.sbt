@@ -1,14 +1,16 @@
 name := "play"
 organization := "com.github.plokhotnyuk"
 version := "1.0-SNAPSHOT"
-scalaVersion := "2.12.6"
+scalaVersion := "2.13.3"
 val root = (project in file("."))
   .enablePlugins(PlayScala, PlayNettyServer)
   .disablePlugins(PlayAkkaHttpServer)
   .disablePlugins(PlayLayoutPlugin)
 libraryDependencies ++= Seq(
   guice,
-  "com.typesafe.play" %% "play-ws" % "2.6.13"
+  "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-core" % "2.4.4",
+  "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % "2.4.4" % "compile-internal",
+  "com.typesafe.play" %% "play-ws" % "2.8.2"
 )
 javaOptions := Seq(
   "-server",
