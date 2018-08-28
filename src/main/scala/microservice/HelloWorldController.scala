@@ -12,7 +12,7 @@ class HelloWorldController @Inject() (components: ControllerComponents)
   import com.github.plokhotnyuk.jsoniter_scala.core._
   import microservice.JsoniterScalaCodecs._
   val jsonGet: Action[AnyContent] = components.actionBuilder.async {
-    Future(Ok(ByteString(writeToArray(HelloWorld("Hello, World!")))))
+    Future(Ok(ByteString.fromArrayUnsafe(writeToArray(HelloWorld("Hello, World!")))))
   }
   val plaintextGet: Action[AnyContent] = components.actionBuilder.async {
     Future(Ok("Hello, World!"))
@@ -20,7 +20,7 @@ class HelloWorldController @Inject() (components: ControllerComponents)
   val jsonPost: Action[ByteString] = components.actionBuilder.async(parse.byteString) { request =>
     if (request.headers.get("Content-Type").contains("application/json; charset=utf-8")) {
       val message = readFromArray[HelloWorld](request.body.toArray)
-      Future(Ok(ByteString(writeToArray(message))))
+      Future(Ok(ByteString.fromArrayUnsafe(writeToArray(message))))
     } else Future(NotAcceptable)
   }
   val plaintextPost: Action[String] = components.actionBuilder.async(parse.tolerantText) { request =>
