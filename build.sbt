@@ -8,6 +8,8 @@ val root = (project in file("."))
   .disablePlugins(PlayLayoutPlugin)
 libraryDependencies ++= Seq(
   guice,
+  "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-core" % "0.29.16",
+  "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % "0.29.16",
   "com.typesafe.play" %% "play-ws" % "2.6.13"
 )
 javaOptions := Seq(
