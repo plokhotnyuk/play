@@ -2,6 +2,7 @@ package microservice
 
 import akka.util.ByteString
 import javax.inject.Singleton
+import com.github.plokhotnyuk.jsoniter_scala.core._
 import com.google.inject.Inject
 import play.api.mvc._
 import scala.concurrent.{ExecutionContext, Future}
@@ -9,8 +10,6 @@ import scala.concurrent.{ExecutionContext, Future}
 @Singleton
 class HelloWorldController @Inject() (components: ControllerComponents)
                                      (implicit ec: ExecutionContext) extends AbstractController(components) {
-  import com.github.plokhotnyuk.jsoniter_scala.core._
-  import microservice.JsoniterScalaCodecs._
   val jsonGet: Action[AnyContent] = components.actionBuilder.async {
     Future(Ok(ByteString.fromArrayUnsafe(writeToArray(HelloWorld("Hello, World!")))))
   }
@@ -27,5 +26,3 @@ class HelloWorldController @Inject() (components: ControllerComponents)
     Future(Ok(request.body))
   }
 }
-
-case class HelloWorld(message: String)
