@@ -1,12 +1,12 @@
 ```sh
 ╔═╗───────╔═══╗╔═══╗
-║╬╠╗╔═╗╔╦╗║╔═╗║║╔══╝
-║╔╣╚╣╬╚╣║║╚╝╔╝╠╣╚══╗
+║╬╠╗╔═╗╔╦╗║╔═╗║║╔═╗║
+║╔╣╚╣╬╚╣║║╚╝╔╝╠╣╚═╝║
 ╚╝╚═╩══╬╗║╔═╝╔╩╣╔═╗║
 ───────╚═╝║  ╚╗║╚═╝║
 ```
 
-Evaluation of [Play](https://github.com/playframework/playframework) 2.6 API and performance using 
+Evaluation of [Play](https://github.com/playframework/playframework) 2.8 API and performance using 
 [Wrk 2](https://github.com/giltene/wrk2).
 
 This project provides examples how to test simplest request and configure server side for better response times and minimal CPU usage:
@@ -22,37 +22,37 @@ sed -i -e 's/1.6/1/g' ./target/universal/stage/bin/play
 
 ### Run the server
 
-- JDK 8:
+- Corretto 8:
 ```sh
-export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+export JAVA_HOME=/usr/lib/jvm/corretto-8
 export JAVA_OPTS="-server -Xms2g -Xmx2g -XX:NewSize=1g -XX:MaxNewSize=1g -XX:+UseParallelGC -XX:-UseBiasedLocking -XX:+AlwaysPreTouch"
 ./target/universal/stage/bin/play
 ```
 
-- JDK 10:
+- OpenJDK 16:
 ```sh
-export JAVA_HOME=/usr/lib/jvm/jdk-10
+export JAVA_HOME=/usr/lib/jvm/openjdk-16
 export JAVA_OPTS="-server -Xms2g -Xmx2g -XX:NewSize=1g -XX:MaxNewSize=1g -XX:+UseParallelGC -XX:-UseBiasedLocking -XX:+AlwaysPreTouch"
 ./target/universal/stage/bin/play
 ```
 
-- JDK 10 + Graal:
+- OpenJDK 16 + Graal:
 ```sh
-export JAVA_HOME=/usr/lib/jvm/jdk-10
+export JAVA_HOME=/usr/lib/jvm/openjdk-16
 export JAVA_OPTS="-server -Xms2g -Xmx2g -XX:NewSize=1g -XX:MaxNewSize=1g -XX:+UseParallelGC -XX:-UseBiasedLocking -XX:+AlwaysPreTouch -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCI -XX:+UseJVMCICompiler"
 ./target/universal/stage/bin/play
 ```
 
-- GraalVM CE:
+- GraalVM CE Java 8:
 ```sh
-export JAVA_HOME=/usr/lib/jvm/graalvm-ce-1.0.0-rc1
+export JAVA_HOME=/usr/lib/jvm/graalvm-ce-java8
 export JAVA_OPTS="-server -Xms2g -Xmx2g -XX:NewSize=1g -XX:MaxNewSize=1g -XX:+UseParallelGC -XX:-UseBiasedLocking -XX:+AlwaysPreTouch"
 ./target/universal/stage/bin/play
 ```
 
-- GraalVM EE:
+- GraalVM EE Java 11:
 ```sh
-export JAVA_HOME=/usr/lib/jvm/graalvm-ee-1.0.0-rc1
+export JAVA_HOME=/usr/lib/jvm/graalvm-ee-java11
 export JAVA_OPTS="-server -Xms2g -Xmx2g -XX:NewSize=1g -XX:MaxNewSize=1g -XX:+UseParallelGC -XX:-UseBiasedLocking -XX:+AlwaysPreTouch"
 ./target/universal/stage/bin/play
 ```
