@@ -7,7 +7,7 @@
 ```
 
 Evaluation of [Play](https://github.com/playframework/playframework) 2.8 API and performance using 
-[Wrk 2](https://github.com/giltene/wrk2).
+[Wrk 2](https://github.com/giltene/wrk2). But do not touch the project until you [take a pill](https://www.youtube.com/watch?v=ElbYf2uiPmQ).
 
 This project provides examples how to test simplest request and configure server side for better response times and minimal CPU usage:
 
